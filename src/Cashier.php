@@ -1,7 +1,6 @@
 <?php
 
 namespace Kata\FruitShop;
-
 class Cashier
 {
     const APPLE = 'Apple';
@@ -9,13 +8,15 @@ class Cashier
     const MELE = 'Mele';
     const CHERRIES = 'Cherries';
     const BANANAS = 'Bananas';
-
+    const BANANAS_PRICE = 150;
+    const CHERRIES_PRICE = 75;
+    const APPLE_PRICE = 100;
+    const DISCOUNT_CHERRIES = 20;
     private $fruits = [
         self::APPLE => 0,
         self::CHERRIES => 0,
         self::BANANAS => 0,
     ];
-
     private $totalAmount = 0;
 
     public function cash(string $fruit)
@@ -29,20 +30,28 @@ class Cashier
             case self::POMMES:
             case self::MELE:
                 $this->fruits[self::APPLE]++;
-                $this->totalAmount += 100;
+                $this->totalAmount += self::APPLE_PRICE;
                 break;
             case self::CHERRIES:
                 $this->fruits[self::CHERRIES]++;
-                $this->totalAmount += 75;
+                $this->totalAmount += self::CHERRIES_PRICE;
                 break;
             case self::BANANAS:
                 $this->fruits[self::BANANAS]++;
-                $this->totalAmount += 150;
+                $this->totalAmount += self::BANANAS_PRICE;
                 break;
         }
+        $discountCherries = (int)(\floor($this->fruits[self::CHERRIES] / 2) * self::DISCOUNT_CHERRIES);
+        $discountBanana = (int)(\floor($this->fruits[self::BANANAS] / 2) * self::BANANAS_PRICE);
+        return $this->totalAmount - $discountCherries - $discountBanana;
+    }
 
-        $discount = (int) (\floor($this->fruits[self::CHERRIES] / 2) * 20);
-
-        return $this->totalAmount - $discount;
+    public function cashFromCsv($fruits)
+    {
+        $fruits = explode(',', $fruits);
+        foreach ($fruits as $fruit) {
+            $amount = $this->cash($fruit);
+        }
+        return $amount;
     }
 }

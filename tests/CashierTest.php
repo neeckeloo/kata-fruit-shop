@@ -37,24 +37,12 @@ class CashierTest extends TestCase
     {
         return [
             [
-                ['Cherries', 'Cherries'],
-                [75, 130]
-            ],
-            [
-                ['Cherries', 'Cherries', 'Cherries'],
-                [75, 130, 205]
-            ],
-            [
-                ['Apple', 'Cherries', 'Cherries'],
-                [100, 175, 230]
-            ],
-            [
-                ['Cherries', 'Apple', 'Cherries', 'Bananas', 'Cherries', 'Cherries', 'Apple'],
-                [75, 175, 230, 380, 455, 510, 610]
-            ],
-            [
                 ['Cherries', 'Pommes', 'Cherries', 'Bananas', 'Bananas'],
                 [75, 175, 230, 380, 380]
+            ],
+            [
+                ['Cherries', 'Pommes', 'Cherries', 'Bananas', 'Apple', 'Mele'],
+                [75, 175, 230, 380, 480, 580]
             ],
         ];
     }
