@@ -5,6 +5,8 @@ namespace Kata\FruitShop;
 class Cashier
 {
     const APPLE = 'Apple';
+    const POMMES = 'Pommes';
+    const MELE = 'Mele';
     const CHERRIES = 'Cherries';
     const BANANAS = 'Bananas';
 
@@ -18,20 +20,23 @@ class Cashier
 
     public function cash(string $fruit)
     {
-        if (!\in_array($fruit, [self::APPLE, self::CHERRIES, self::BANANAS])) {
+        if (!\in_array($fruit, [self::APPLE, self::CHERRIES, self::BANANAS, self::POMMES, self::MELE])) {
             throw new InvalidFruit();
         }
 
-        $this->fruits[$fruit]++;
-
         switch ($fruit) {
             case self::APPLE:
+            case self::POMMES:
+            case self::MELE:
+                $this->fruits[self::APPLE]++;
                 $this->totalAmount += 100;
                 break;
             case self::CHERRIES:
+                $this->fruits[self::CHERRIES]++;
                 $this->totalAmount += 75;
                 break;
             case self::BANANAS:
+                $this->fruits[self::BANANAS]++;
                 $this->totalAmount += 150;
                 break;
         }

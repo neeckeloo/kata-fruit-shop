@@ -52,6 +52,10 @@ class CashierTest extends TestCase
                 ['Cherries', 'Apple', 'Cherries', 'Bananas', 'Cherries', 'Cherries', 'Apple'],
                 [75, 175, 230, 380, 455, 510, 610]
             ],
+            [
+                ['Cherries', 'Pommes', 'Cherries', 'Bananas', 'Bananas'],
+                [75, 175, 230, 380, 380]
+            ],
         ];
     }
 }
