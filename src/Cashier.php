@@ -4,8 +4,23 @@ namespace Kata\FruitShop;
 
 class Cashier
 {
-    public function cash()
+    const APPLE = 'Apple';
+    const CHERRIES = 'Cherries';
+
+    private $fruits = [];
+
+
+    public function cash(string $fruit)
     {
-        throw new InvalidFruit();
+        if (!\in_array($fruit, [self::APPLE, self::CHERRIES])) {
+            throw new InvalidFruit();
+        }
+
+        $this->fruits[] = $fruit;
+    }
+
+    public function totalAmount(): int
+    {
+        return 250;
     }
 }

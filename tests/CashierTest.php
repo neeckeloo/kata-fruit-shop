@@ -25,4 +25,31 @@ class CashierTest extends TestCase
 
         $cashier->cash('invalid fruit');
     }
+
+    /**
+     * @test
+     * @dataProvider cartProvider
+     */
+    public function it_create_cart(array $fruits, $expectedTotalAmount)
+    {
+        $cashier = new Cashier();
+
+        $this->assertNotEmpty($fruits);
+
+        foreach ($fruits as $fruit) {
+            $cashier->cash($fruit);
+        }
+
+        $this->assertSame($expectedTotalAmount, $cashier->totalAmount());
+    }
+
+    public function cartProvider()
+    {
+        return [
+            [
+                ['Apple', 'Cherries', 'Cherries'],
+                250
+            ]
+        ];
+    }
 }
