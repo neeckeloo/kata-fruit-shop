@@ -8,10 +8,13 @@ class Cashier
     const MELE = 'Mele';
     const CHERRIES = 'Cherries';
     const BANANAS = 'Bananas';
+
     const BANANAS_PRICE = 150;
     const CHERRIES_PRICE = 75;
     const APPLE_PRICE = 100;
+
     const DISCOUNT_CHERRIES = 20;
+
     private $fruits = [
         self::APPLE => 0,
         self::CHERRIES => 0,
@@ -41,17 +44,21 @@ class Cashier
                 $this->totalAmount += self::BANANAS_PRICE;
                 break;
         }
-        $discountCherries = (int)(\floor($this->fruits[self::CHERRIES] / 2) * self::DISCOUNT_CHERRIES);
-        $discountBanana = (int)(\floor($this->fruits[self::BANANAS] / 2) * self::BANANAS_PRICE);
+
+        $discountCherries = (int) (\floor($this->fruits[self::CHERRIES] / 2) * self::DISCOUNT_CHERRIES);
+        $discountBanana = (int) (\floor($this->fruits[self::BANANAS] / 2) * self::BANANAS_PRICE);
+
         return $this->totalAmount - $discountCherries - $discountBanana;
     }
 
-    public function cashFromCsv($fruits)
+    public function cashFromCsv(string $fruits)
     {
         $fruits = explode(',', $fruits);
+
         foreach ($fruits as $fruit) {
             $amount = $this->cash($fruit);
         }
+
         return $amount;
     }
 }
