@@ -9,14 +9,6 @@ class CashierTest extends TestCase
     /**
      * @test
      */
-    public function instantiate_cashier()
-    {
-        $cashier = new Cashier();
-    }
-
-    /**
-     * @test
-     */
     public function it_throws_an_exception_when_an_invalid_fruit_is_provided()
     {
         $cashier = new Cashier();
@@ -30,26 +22,36 @@ class CashierTest extends TestCase
      * @test
      * @dataProvider cartProvider
      */
-    public function it_create_cart(array $fruits, $expectedTotalAmount)
+    public function it_create_cart(array $fruits, array $expectedTotalAmounts)
     {
         $cashier = new Cashier();
 
         $this->assertNotEmpty($fruits);
 
-        foreach ($fruits as $fruit) {
-            $cashier->cash($fruit);
+        foreach ($fruits as $key => $fruit) {
+            $this->assertSame($expectedTotalAmounts[$key], $cashier->cash($fruit));
         }
-
-        $this->assertSame($expectedTotalAmount, $cashier->totalAmount());
     }
 
     public function cartProvider()
     {
         return [
             [
+                ['Cherries', 'Cherries'],
+                [75, 130]
+            ],
+            [
+                ['Cherries', 'Cherries', 'Cherries'],
+                [75, 130, 205]
+            ],
+            [
                 ['Apple', 'Cherries', 'Cherries'],
-                250
-            ]
+                [100, 175, 230]
+            ],
+            [
+                ['Cherries', 'Apple', 'Cherries', 'Bananas', 'Cherries', 'Cherries', 'Apple'],
+                [75, 175, 230, 380, 455, 510, 610]
+            ],
         ];
     }
 }
